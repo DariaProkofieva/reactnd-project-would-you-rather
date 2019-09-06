@@ -12,7 +12,8 @@ class Question extends Component {
         <div><span>{name} asks:</span></div>
         <div><h3>Would you rather</h3></div>
         <div>{optionOne.text}</div>
-        <Link to ='/answer' id={this.props.id}>View Profile</Link>
+        <Link to={`/answer/${id}`}>View Profile</Link>
+        <div>{this.props.id}</div>
       </div>
     )
   }
