@@ -4,6 +4,7 @@ import { handleInitialData } from '../actions/shared'
 import Dashboard from './Dashboard'
 import LoadingBar from 'react-redux-loading-bar'
 import NewQuestion from './NewQuestion'
+import Answer from './Answer'
 
 class App extends Component {
   componentDidMount() {
@@ -13,8 +14,7 @@ class App extends Component {
     return (
       <div>
         <LoadingBar />
-        <Dashboard/>
-        <NewQuestion/>
+        <Answer/>
       </div>
     )
   }

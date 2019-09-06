@@ -12,7 +12,7 @@ class NewQuestion extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  handleSubnit = ( event ) => {
+  handleSubmit = ( event ) => {
     event.preventDefault()
     const { optionOneText, optionTwoText } = this.state
     const { dispatch } = this.props
@@ -26,7 +26,7 @@ class NewQuestion extends Component {
       <h2>Create New Question</h2>
       <p>Complete the question</p>
       <h3>Would you rather</h3>
-      <form onSubmit={this.handleSubnit}>
+      <form onSubmit={this.handleSubmit}>
       <input type="text"
              placeholder="Enter option one text here"
              value={this.state.optionOneText}
