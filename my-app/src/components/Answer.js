@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { saveQuestionAnswer } from '../utils/api'
+import { handleAddAnswer } from '../actions/shared'
+import { addUserAnswer } from '../actions/users'
 import { connect } from 'react-redux'
 
 class Answer extends Component {
@@ -13,15 +14,12 @@ class Answer extends Component {
   handleSubmitAnswer = ( event ) => {
       event.preventDefault()
       const { answer } = this.state
-      const { dispatch } = this.props
-      dispatch(saveQuestionAnswer({
-        answer
-      }))
-
+      const { dispatch, authedUser, qId} = this.props
+      dispatch(handleAddAnswer({authedUser, qId, answer}))
   }
 
   render() {
-    const { author, answer, question, optionOne, optionTwo} =this.props
+    const { author, question, optionOne, optionTwo, authedUser, qId} =this.props
     return (
       <div className='answer'>
       <div><span>{author} asks:</span></div>
@@ -55,12 +53,15 @@ function mapStateToProps({ questions, authedUser, users }, props) {
   const author = question.author
   const optionOne = question.optionOne.text
   const optionTwo = question.optionTwo.text
+  const qId = id
   return {
     question,
     id,
     author,
     optionOne,
-    optionTwo
+    optionTwo,
+    qId,
+    authedUser
   }
 }
 

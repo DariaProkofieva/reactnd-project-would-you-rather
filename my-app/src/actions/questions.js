@@ -1,4 +1,4 @@
-import { saveQuestion, saveQuestionAnswer } from '../utils/api'
+import { saveQuestion } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const ADD_QUESTION = 'ADD_QUESTION'
@@ -11,25 +11,12 @@ function addQuestion(question) {
   }
 }
 
-function addAnswer(authedUser, qId, answer) {
+export function addAnswer(authedUser, qId, answer) {
   return{
     type:ADD_ANSWER,
     authedUser,
     qId,
     answer
-  }
-}
-
-export function handleAddAnswer(info) {
-  return (dispatch) => {
-    dispatch(addAnswer(info))
-
-    return saveQuestionAnswer(info)
-    .catch((event) => {
-      console.warn('Error in addAnswer: ', event)
-      dispatch(addAnswer(info))
-      alert('There was an error, please try again')
-    })
   }
 }
 
