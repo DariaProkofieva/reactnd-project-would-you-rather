@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { setAuthedUser } from '../actions/authedUser'
 
 class SingIn extends Component {
   state = {
-    selectedUser: ''
+    selectedUser: null
   }
 
   handleChange = ( event ) => {
     this.setState({ selectedUser: event.target.value })
+  }
+
+  handleSubmitUser = ( event ) => {
+      event.preventDefault()
+      const { selectedUser } = this.state
+      const { dispatch } = this.props
+      dispatch(setAuthedUser(selectedUser))
   }
 
   render() {
@@ -31,9 +39,13 @@ class SingIn extends Component {
   }
 }
 
-function mapStateToProps({  users }) {
+function mapStateToProps({  users, authedUser }) {
+  if (authedUser === undefined) {
+    return;
+  }
   return {
-    users
+    users,
+    authedUser
   }
 }
 export default connect(mapStateToProps)(SingIn)
