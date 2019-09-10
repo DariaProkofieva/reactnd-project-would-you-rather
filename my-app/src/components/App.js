@@ -18,8 +18,8 @@ class App extends Component {
           <LoadingBar />
           <Dashboard/>
           <Route path='/' exact component={Dashboard} />
-          <Route path='/answer/:id' exact component={Answer} />
-          <Route path='/newQuestion' exact component={NewQuestion} />
+          <Route path='/answer/:id' component={Answer} />
+          <Route path='/newQuestion' component={NewQuestion} />
         </Fragment>
       </Router>
     )

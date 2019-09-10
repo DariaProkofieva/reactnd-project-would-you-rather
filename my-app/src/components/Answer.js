@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { handleAddAnswer } from '../actions/shared'
-import { addUserAnswer } from '../actions/users'
 import { connect } from 'react-redux'
 
 class Answer extends Component {
@@ -15,7 +14,7 @@ class Answer extends Component {
       event.preventDefault()
       const { answer } = this.state
       const { dispatch, authedUser, qId} = this.props
-      dispatch(handleAddAnswer({authedUser, qId, answer}))
+      dispatch(handleAddAnswer(authedUser, qId, answer))
   }
 
   render() {
