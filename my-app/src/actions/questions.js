@@ -11,11 +11,11 @@ function addQuestion(question) {
   }
 }
 
-export function addAnswer(authedUser, qId, answer) {
+export function addAnswer(authedUser, qid, answer) {
   return{
     type:ADD_ANSWER,
     authedUser,
-    qId,
+    qid,
     answer
   }
 }

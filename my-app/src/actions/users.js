@@ -8,11 +8,11 @@ export function receiveUsers(users) {
   }
 }
 
-export function addUserAnswer(authedUser, qId, answer) {
+export function addUserAnswer(authedUser, qid, answer) {
   return {
     type: ADD_USER_ANSWER,
     authedUser,
-    qId,
+    qid,
     answer
   }
 }

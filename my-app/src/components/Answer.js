@@ -13,12 +13,12 @@ class Answer extends Component {
   handleSubmitAnswer = ( event ) => {
       event.preventDefault()
       const { answer } = this.state
-      const { dispatch, authedUser, qId} = this.props
-      dispatch(handleAddAnswer(authedUser, qId, answer))
+      const { dispatch, authedUser, qid} = this.props
+      dispatch(handleAddAnswer(authedUser, qid, answer))
   }
 
   render() {
-    const { author, question, optionOne, optionTwo, authedUser, qId} =this.props
+    const { author, question, optionOne, optionTwo, authedUser, qid} =this.props
     return (
       <div className='answer'>
       <div><span>{author} asks:</span></div>
@@ -52,14 +52,14 @@ function mapStateToProps({ questions, authedUser, users }, props) {
   const author = question.author
   const optionOne = question.optionOne.text
   const optionTwo = question.optionTwo.text
-  const qId = id
+  const qid = id
   return {
     question,
     id,
     author,
     optionOne,
     optionTwo,
-    qId,
+    qid,
     authedUser
   }
 }
