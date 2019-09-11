@@ -7,6 +7,7 @@ import NewQuestion from './NewQuestion'
 import Answer from './Answer'
 import SingIn from './SingIn'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Nav from './Nav'
 
 class App extends Component {
   componentDidMount() {
@@ -17,15 +18,26 @@ class App extends Component {
       <Router>
         <Fragment>
           <LoadingBar />
-          <SingIn/>
-          <Route path='/home' exact component={Dashboard} />
-          <Route path='/answer/:id' component={Answer} />
-          <Route path='/newQuestion' component={NewQuestion} />
-          <Route path='/login' component={SingIn} />
+            <div>
+              <Nav />
+              {this.props.authedUser === null
+                ?  <SingIn />
+                : <div>
+                    <Route path='/home' exact component={Dashboard} />
+                    <Route path='/answer/:id' component={Answer} />
+                    <Route path='/newQuestion' component={NewQuestion} />
+                    <Route path='/login' component={SingIn}/>
+                  </div>}
+              </div>
         </Fragment>
       </Router>
     )
   }
 }
 
-export default connect()(App)
+function mapStateToProps({ authedUser }) {
+  return {
+    authedUser
+  }
+}
+export default connect(mapStateToProps)(App)

@@ -26,6 +26,7 @@ class SingIn extends Component {
         <h1>Sing in</h1>
         <form onSubmit={this.handleSubmitUser}>
           <select onChange={this.handleChange}>
+            <option>Select User</option>
             {Object.keys(this.props.users).map((user) => (
               <option key={this.props.users[user].id} value={this.props.users[user].id}>
                 {this.props.users[user].name}

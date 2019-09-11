@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleAddQuestion } from '../actions/questions'
+import { Redirect } from 'react-router-dom'
 
 class NewQuestion extends Component {
   state = {
     optionOneText: '',
     optionTwoText: '',
+    toHome: false,
   }
 
   handleChange = ( event ) => {
@@ -17,10 +19,17 @@ class NewQuestion extends Component {
     const { optionOneText, optionTwoText } = this.state
     const { dispatch } = this.props
     dispatch(handleAddQuestion(optionOneText, optionTwoText))
-    console.log('New Question: ', optionOneText, optionTwoText)
+    this.setState(() => ({
+      toHome: true
+    }))
   }
 
   render() {
+    const { toHome } = this.state
+
+    if (toHome === true) {
+      return <Redirect to='/home'/>
+    }
     return (
       <div>
       <h2>Create New Question</h2>
