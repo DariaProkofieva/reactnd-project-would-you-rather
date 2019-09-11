@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { handleAddAnswer } from '../actions/shared'
 import { connect } from 'react-redux'
+//import { Redirect } from 'react-router-dom'
+import Results from './Results'
 
 class Answer extends Component {
   state = {
     answer: '',
+    toResults:false
   }
   handleChange = ( event ) => {
     this.setState({ answer: event.target.value })
@@ -15,29 +18,37 @@ class Answer extends Component {
       const { answer } = this.state
       const { dispatch, authedUser, qid} = this.props
       dispatch(handleAddAnswer(authedUser, qid, answer))
+      this.setState(() => ({
+        toResults: true
+      }))
   }
 
   render() {
+    const { toResults } = this.state
     const { author, question, optionOne, optionTwo, authedUser, qid} =this.props
     return (
       <div className='answer'>
-      <div><span>{author} asks:</span></div>
-      <div><h3>Would you rather</h3></div>
-      <form onSubmit={this.handleSubmitAnswer}>
-        <input type="radio"
-               id="optionOne"
-               name="option"
-               value="optionOne"
-               onChange={this.handleChange}/>
-        <label htmlFor="optionOne">{optionOne}</label>
-        <input type="radio"
-               id="optionTwo"
-               name="option"
-               value="optionTwo"
-               onChange={this.handleChange}/>
-        <label htmlFor="optionOne">{optionTwo}</label>
-        <button>Submit</button>
-        </form>
+        {toResults === false ?
+          <div>
+          <div><span>{author} asks:</span></div>
+          <div><h3>Would you rather</h3></div>
+          <form onSubmit={this.handleSubmitAnswer}>
+            <input type="radio"
+                   id="optionOne"
+                   name="option"
+                   value="optionOne"
+                   onChange={this.handleChange}/>
+            <label htmlFor="optionOne">{optionOne}</label>
+            <input type="radio"
+                   id="optionTwo"
+                   name="option"
+                   value="optionTwo"
+                   onChange={this.handleChange}/>
+            <label htmlFor="optionOne">{optionTwo}</label>
+            <button>Submit</button>
+            </form>
+            </div>
+          :<Results id={this.props.id}/>}
       </div>
     )
   }

@@ -6,6 +6,7 @@ import LoadingBar from 'react-redux-loading-bar'
 import NewQuestion from './NewQuestion'
 import Answer from './Answer'
 import SingIn from './SingIn'
+import Results from './Results'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Nav from './Nav'
 
@@ -27,6 +28,7 @@ class App extends Component {
                     <Route path='/answer/:id' component={Answer} />
                     <Route path='/newQuestion' component={NewQuestion} />
                     <Route path='/login' component={SingIn}/>
+                    <Route path='/results' component={Results}/>
                   </div>}
               </div>
         </Fragment>

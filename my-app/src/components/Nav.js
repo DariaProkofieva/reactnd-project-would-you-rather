@@ -10,6 +10,7 @@ class Nav extends Component {
       dispatch(logout(authedUser))
   }
   render() {
+  const { authedUser, userName } = this.props
   return (
     <nav className='nav'>
       <ul>
@@ -25,13 +26,13 @@ class Nav extends Component {
         </li>
         <li>
           <NavLink to='/home' >
-            LeaderBoard
+            Leader Board
           </NavLink>
         </li>
         {this.props.authedUser !== null
           &&  <div>
                 <div>
-                    Hello, Authed User
+                    Hello {this.props.userName}
                 </div>
                 <li>
                   <NavLink to='/login' onClick = {this.handleLogout}>
@@ -44,9 +45,11 @@ class Nav extends Component {
   )}
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ authedUser, users }) {
+  const userName = users[authedUser] ? users[authedUser].name : null
   return {
-    authedUser
+    authedUser,
+    userName
   }
 }
 export default connect(mapStateToProps)(Nav)
