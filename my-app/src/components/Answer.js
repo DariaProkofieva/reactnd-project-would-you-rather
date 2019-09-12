@@ -25,12 +25,12 @@ class Answer extends Component {
 
   render() {
     const { toResults } = this.state
-    const { author, question, optionOne, optionTwo, authedUser, qid} =this.props
+    const { name, question, optionOne, optionTwo, authedUser, qid} =this.props
     return (
       <div className='answer'>
         {toResults === false ?
           <div>
-          <div><span>{author} asks:</span></div>
+          <div><span>{name} asks:</span></div>
           <div><h3>Would you rather</h3></div>
           <form onSubmit={this.handleSubmitAnswer}>
             <input type="radio"
@@ -71,7 +71,8 @@ function mapStateToProps({ questions, authedUser, users }, props) {
     optionOne,
     optionTwo,
     qid,
-    authedUser
+    authedUser,
+    name: author ===undefined ?  null: users[author].name
   }
 }
 

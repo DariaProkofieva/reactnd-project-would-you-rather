@@ -2,16 +2,25 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class Results extends Component {
+
   render() {
-    const { author, optionOne, optionTwo } =this.props
+    const { optionOne, optionTwo, question, name } =this.props
+    const allVotes = question.optionOne.votes.length + question.optionTwo.votes.length
+    const optionOneVotes = question.optionOne.votes.length
+    const optionTwoVotes = question.optionTwo.votes.length
+    const oneUser = Math.round(100/allVotes);
+    const percentageOptionOne = oneUser*optionOneVotes
+    const percentageOptionTwo = oneUser*optionTwoVotes
     return (
       <div className='results'>
-        <div><span>Asked by{author}</span></div>
+        <div><span>Asked by {name}</span></div>
         <div><h2>Results:</h2></div>
         <h3>Would you rather {optionOne}?</h3>
-        <p>{} out of {}} votes</p>
+        <p>{percentageOptionOne} %</p>
+        <p>{optionOneVotes} out of {allVotes} votes</p>
         <h3>Would you rather {optionTwo}?</h3>
-        <p>{} out of {}} votes</p>
+        <p>{percentageOptionTwo} %</p>
+        <p>{optionTwoVotes} out of {allVotes} votes</p>
       </div>
     )
   }
@@ -26,9 +35,10 @@ function mapStateToProps({ questions, authedUser, users }, { id }) {
   const optionOne = question.optionOne.text
   const optionTwo = question.optionTwo.text
   return {
-    author,
     optionOne,
     optionTwo,
+    question,
+    name: author ===undefined ?  null: users[author].name
   }
 }
 export default connect(mapStateToProps)(Results)
