@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Score from './Score'
 
-
 class ScoreList extends Component {
   render() {
-    const { userId } = this.props
+    const { usersIdsSorted } = this.props
     return (
       <ul>
-         {userId.map((id) => (
+         {usersIdsSorted.map((id) => (
            <li key={id}>
             <Score id={id}/>
            </li>
@@ -20,7 +19,12 @@ class ScoreList extends Component {
 
 function mapStateToProps ({ users }) {
   return {
-    userId:Object.keys(users)
+    usersIdsSorted:Object.keys(users)
+    .sort((userKeyA, userKeyB) =>
+      Object.keys(users[userKeyB].answers).length
+      + users[userKeyB].questions.length
+      - Object.keys(users[userKeyA].answers).length
+      - users[userKeyA].questions.length)
   }
 }
 

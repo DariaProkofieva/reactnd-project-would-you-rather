@@ -5,12 +5,13 @@ import { connect } from 'react-redux'
 class Score extends Component {
 
   render() {
-    const { users, authedUser, questions, user, id, answeredQuestions, unAnsweredQuestions  } = this.props
+    const { user, answeredQuestions, createdQuestions, score } = this.props
     return (
       <div>
         <h3>{user.name}</h3>
-        <p>Answered Questions {answeredQuestions} </p>
-        <p>Unanswered Questions {unAnsweredQuestions} </p>
+        <p>Answered questions {answeredQuestions} </p>
+        <p>Created questions {createdQuestions} </p>
+        <h3>Score {score}</h3>
       </div>
     )
   }
@@ -22,15 +23,13 @@ function mapStateToProps ({ questions, authedUser, users }, { id }) {
     return;
   }
   const answeredQuestions = Object.keys(user.answers).length
-  const unAnsweredQuestions = Object.keys(questions).length - answeredQuestions
+  const createdQuestions = Object.keys(user.questions).length
+  const score = createdQuestions + answeredQuestions
   return {
-    authedUser,
-    users,
-    questions,
     user,
-    id,
     answeredQuestions,
-    unAnsweredQuestions
+    createdQuestions,
+    score
   }
 }
 
