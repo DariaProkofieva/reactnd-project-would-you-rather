@@ -9,6 +9,7 @@ import SingIn from './SingIn'
 import Results from './Results'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Nav from './Nav'
+import ScoreList from './ScoreList'
 
 class App extends Component {
   componentDidMount() {
@@ -29,6 +30,7 @@ class App extends Component {
                     <Route path='/newQuestion' component={NewQuestion} />
                     <Route path='/login' component={SingIn}/>
                     <Route path='/results' component={Results}/>
+                    <Route path='/leaderBoard' component={ScoreList}/>
                   </div>}
               </div>
         </Fragment>

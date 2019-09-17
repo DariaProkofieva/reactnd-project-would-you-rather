@@ -25,7 +25,7 @@ class Nav extends Component {
           </NavLink>
         </li>
         <li>
-          <NavLink to='/home' >
+          <NavLink to='/leaderBoard' >
             Leader Board
           </NavLink>
         </li>
