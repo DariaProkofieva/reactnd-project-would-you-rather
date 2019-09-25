@@ -20,7 +20,7 @@ class App extends Component {
       <Router>
         <Fragment>
           <LoadingBar />
-            <div>
+            <div className='container'>
               <Nav />
               {this.props.authedUser === null
                 ?  <SingIn />
