@@ -31,11 +31,11 @@ class NewQuestion extends Component {
       return <Redirect to='/home'/>
     }
     return (
-      <div>
-      <h2>Create New Question</h2>
-      <p>Complete the question</p>
-      <h3>Would you rather</h3>
-      <form onSubmit={this.handleSubmit}>
+      <div className="newQuestion">
+      <h1>Create New Question</h1>
+      <p>Complete the question:</p>
+      <h2>Would you rather...</h2>
+      <form onSubmit={this.handleSubmit} className="newQuestion">
       <input type="text"
              placeholder="Enter option one text here"
              value={this.state.optionOneText}
@@ -49,7 +49,7 @@ class NewQuestion extends Component {
              name="optionTwoText"
              maxLength={100}
              onChange={this.handleChange}/>
-      <button>Submit</button>
+      <button className="btn">Submit</button>
       </form>
       </div>
     )

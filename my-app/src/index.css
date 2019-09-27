@@ -103,3 +103,21 @@ a {
   text-decoration: none;
   color: #252525;
 }
+/*////////////newQuestion Component//////////*/
+.newQuestion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+}
+
+input {
+  width: 380px;
+  padding: 10px;
+  border-radius: 25px;
+  border: 1px solid rgba(0,0,0,.29);
+  overflow: auto;
+}
+input:focus{
+  outline: none;
+}
