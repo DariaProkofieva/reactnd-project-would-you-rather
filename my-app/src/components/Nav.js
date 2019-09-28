@@ -1,18 +1,33 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '../actions/authedUser'
 
-class Nav extends Component {
-  handleLogout = ( event ) => {
+import styled from "styled-components"
+
+
+const Square = styled.div`
+  height: 20px;
+  color: ${props => props.active ? "red" : "yellow"};
+  user-select: none;
+
+  background-color: ${props => props.theme.mainColor};
+`
+
+const Nav = ({ authedUser, userName, avatar }) => {
+  const [active, setActive] = useState(false)
+
+
+
+  const handleLogout = ( event ) => {
       event.preventDefault()
       const { dispatch, authedUser } = this.props
       dispatch(logout(authedUser))
   }
-  render() {
-  const { authedUser, userName, avatar } = this.props
+
   return (
     <nav className='nav'>
+    <Square active ={active} onClick ={() => setActive(!active)}>safsdfsdfdfsfs</Square>
       <ul>
         <li>
           <NavLink to='/home' exact >
@@ -29,19 +44,18 @@ class Nav extends Component {
             Leader Board
           </NavLink>
         </li>
-        {this.props.authedUser !== null
+        {authedUser !== null
           &&  <div className='navLogin'>
                 <div>
-
-                  <div>Hello, {this.props.userName} </div>
+                  <div>Hello, {userName} </div>
                   <img
-                    src={this.props.avatar}
-                    alt={`Avatar of ${this.props.userName}`}
+                    src={avatar}
+                    alt={`Avatar of ${userName}`}
                     className='avatarSmall'
                   />
                 </div>
                 <li>
-                  <NavLink to='/login' onClick = {this.handleLogout}>
+                  <NavLink to='/login' onClick = {() => handleLogout()}>
                      Log out
                   </NavLink>
                 </li>
@@ -49,7 +63,7 @@ class Nav extends Component {
       </ul>
     </nav>
   )}
-}
+
 
 function mapStateToProps({ authedUser, users }) {
   const userName = users[authedUser] ? users[authedUser].name : null

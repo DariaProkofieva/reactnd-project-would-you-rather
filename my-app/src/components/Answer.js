@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { handleAddAnswer } from '../actions/shared'
 import { connect } from 'react-redux'
 //import { Redirect } from 'react-router-dom'
 import Results from './Results'
 
-class Answer extends Component {
+class Answer extends React.Component {
   state = {
     answer: '',
     toResults:false
@@ -25,36 +25,48 @@ class Answer extends Component {
 
   render() {
     const { toResults } = this.state
-    const { name, question, optionOne, optionTwo, authedUser, qid} =this.props
+    const { name, question, optionOne, optionTwo, authedUser, qid, avatar} =this.props
     return (
-      <div className='answer'>
+      <div className="answer">
         {toResults === false ?
-          <div>
-          <div><span>{name} asks:</span></div>
-          <div><h3>Would you rather</h3></div>
-          <form onSubmit={this.handleSubmitAnswer}>
-            <input type="radio"
-                   id="optionOne"
-                   name="option"
-                   value="optionOne"
-                   onChange={this.handleChange}/>
-            <label htmlFor="optionOne">{optionOne}</label>
-            <input type="radio"
-                   id="optionTwo"
-                   name="option"
-                   value="optionTwo"
-                   onChange={this.handleChange}/>
-            <label htmlFor="optionOne">{optionTwo}</label>
-            <button>Submit</button>
-            </form>
+          <div className="question_avatar">
+            <div className="avatar_and_name">
+              <h2>{name} asks:</h2>
+                <img
+                  src={this.props.avatar}
+                  alt={`Avatar of ${this.props.name}`}
+                  className='avatarBig'
+                />
             </div>
-          :<Results id={this.props.id}/>}
-      </div>
+            <div className="answerOptions">
+              <h1>Would you rather...</h1>
+              <form onSubmit={this.handleSubmitAnswer} className="form">
+                <div className="radio">
+                  <input type="radio"
+                         id="optionOne"
+                         name="option"
+                         value="optionOne"
+                         onChange={this.handleChange}/>
+                  <label htmlFor="optionOne">{optionOne}</label>
+                </div>
+                <div className="radio">
+                  <input type="radio"
+                         id="optionTwo"
+                         name="option"
+                         value="optionTwo"
+                         onChange={this.handleChange}/>
+                  <label htmlFor="optionOne">{optionTwo}</label>
+                </div>
+                <button className="btn">Submit</button>
+              </form>
+            </div>
+          </div>
+        :<Results id={this.props.id}/>}</div>
     )
   }
 }
 
-function mapStateToProps({ questions, authedUser, users }, props) {
+const mapStateToProps = ({ questions, authedUser, users }, props) => {
   const { id } = props.match.params
   const question = questions[id]
   if (question === undefined) {
@@ -64,6 +76,7 @@ function mapStateToProps({ questions, authedUser, users }, props) {
   const optionOne = question.optionOne.text
   const optionTwo = question.optionTwo.text
   const qid = id
+  const avatar =users[authedUser]?users[authedUser].avatarURL:null
   return {
     question,
     id,
@@ -72,9 +85,10 @@ function mapStateToProps({ questions, authedUser, users }, props) {
     optionTwo,
     qid,
     authedUser,
-    name: author ===undefined ?  null: users[author].name
+    name: author ===undefined ?  null: users[author].name,
+    avatar
   }
 }
 
 
-export default connect(mapStateToProps)(Answer)
+export default connect()(Answer)

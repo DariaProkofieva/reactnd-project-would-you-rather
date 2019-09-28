@@ -7,10 +7,19 @@ import { Provider } from 'react-redux'
 import reducer from './reducers'
 import middleware from './middleware'
 
-const store = createStore(reducer, middleware)
+import {ThemeProvider} from 'styled-components'
+import { composeWithDevTools} from "redux-devtools-extension"
 
+
+const store = createStore(reducer, composeWithDevTools(middleware)
+)
+const theme = {
+  mainColor: "blue"
+}
 ReactDOM.render(
   <Provider store={store}>
+  <ThemeProvider theme={theme}>
     <App />
+    </ThemeProvider>
   </Provider>,
    document.getElementById('root'))

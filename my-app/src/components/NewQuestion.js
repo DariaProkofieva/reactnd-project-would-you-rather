@@ -41,14 +41,16 @@ class NewQuestion extends Component {
              value={this.state.optionOneText}
              name="optionOneText"
              maxLength={100}
-             onChange={this.handleChange}/>
+             onChange={this.handleChange}
+             className="option"/>
       <h3>OR</h3>
       <input type="text"
              placeholder="Enter option two text here"
              value={this.state.optionTwoText}
              name="optionTwoText"
              maxLength={100}
-             onChange={this.handleChange}/>
+             onChange={this.handleChange}
+             className="option"/>
       <button className="btn">Submit</button>
       </form>
       </div>
