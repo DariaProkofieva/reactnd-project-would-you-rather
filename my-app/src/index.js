@@ -14,8 +14,12 @@ import { composeWithDevTools} from "redux-devtools-extension"
 const store = createStore(reducer, composeWithDevTools(middleware)
 )
 const theme = {
-  mainColor: "blue"
+  mainBlue: "#8BAFED",
+  mainOrange:"#FF8C00",
+  blue:"#CEDFFE",
+  orange:"#FEDDCC"
 }
+
 ReactDOM.render(
   <Provider store={store}>
   <ThemeProvider theme={theme}>

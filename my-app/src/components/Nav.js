@@ -1,24 +1,36 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useState} from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logout } from '../actions/authedUser'
 
 import styled from "styled-components"
 
-
-const Square = styled.div`
-  height: 20px;
-  color: ${props => props.active ? "red" : "yellow"};
-  user-select: none;
-
-  background-color: ${props => props.theme.mainColor};
+const StyledNavLink = styled(NavLink)`
+  :hover{background-color: ${props => props.theme.mainOrange}};
+  list-style-type: none;
+  font-size: 16px;
+  padding: 14px;
+  border-radius:25px;
 `
-
+const MainNav = styled.nav`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items:center;
+`
+const SmallAvatar = styled.img`
+  height: 50px;
+  border-radius: 25px;
+  margin: 10px;
+`
+const StyledDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items:center;
+`
 const Nav = ({ authedUser, userName, avatar }) => {
   const [active, setActive] = useState(false)
-
-
-
   const handleLogout = ( event ) => {
       event.preventDefault()
       const { dispatch, authedUser } = this.props
@@ -26,42 +38,20 @@ const Nav = ({ authedUser, userName, avatar }) => {
   }
 
   return (
-    <nav className='nav'>
-    <Square active ={active} onClick ={() => setActive(!active)}>safsdfsdfdfsfs</Square>
-      <ul>
-        <li>
-          <NavLink to='/home' exact >
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/newQuestion' >
-            New Question
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/leaderBoard' >
-            Leader Board
-          </NavLink>
-        </li>
+      <MainNav>
+        <StyledNavLink to='/home'>Home</StyledNavLink>
+        <StyledNavLink to='/newQuestion'>New Question</StyledNavLink>
+        <StyledNavLink to='/leaderBoard'>Leader Board</StyledNavLink>
         {authedUser !== null
-          &&  <div className='navLogin'>
-                <div>
+          &&  <StyledDiv>
                   <div>Hello, {userName} </div>
-                  <img
-                    src={avatar}
-                    alt={`Avatar of ${userName}`}
-                    className='avatarSmall'
-                  />
-                </div>
-                <li>
-                  <NavLink to='/login' onClick = {() => handleLogout()}>
-                     Log out
-                  </NavLink>
-                </li>
-              </div>}
-      </ul>
-    </nav>
+                    <SmallAvatar
+                        src={avatar}
+                        alt={`Avatar of ${userName}`}
+                      ></SmallAvatar>
+                  <StyledNavLink  to='/login' onClick = {() => handleLogout()}>Log out</StyledNavLink> 
+              </StyledDiv>}
+      </MainNav>
   )}
 
 

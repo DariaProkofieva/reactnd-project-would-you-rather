@@ -26,7 +26,8 @@ ul {
 }
 
 /*////////////Nav Component//////////*/
-.nav ul, .navLogin, .navLogin div {
+
+/* .nav ul, .navLogin, .navLogin div {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -48,7 +49,8 @@ ul {
   height: 50px;
   border-radius: 25px;
   margin: 10px;
-}
+} */
+
 /*////////////SingIn Component//////////*/
 .singIn {
   display: flex;
