@@ -11,6 +11,8 @@ const StyledNavLink = styled(NavLink)`
   font-size: 16px;
   padding: 14px;
   border-radius:25px;
+  text-decoration: none;
+  color: ${props => props.theme.black}
 `
 const MainNav = styled.nav`
   display: flex;
@@ -29,11 +31,9 @@ const StyledDiv = styled.div`
   justify-content: space-around;
   align-items:center;
 `
-const Nav = ({ authedUser, userName, avatar }) => {
+const Nav = ({ authedUser, userName, avatar, dispatch }) => {
   const [active, setActive] = useState(false)
   const handleLogout = ( event ) => {
-      event.preventDefault()
-      const { dispatch, authedUser } = this.props
       dispatch(logout(authedUser))
   }
 

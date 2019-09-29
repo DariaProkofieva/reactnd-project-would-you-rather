@@ -17,7 +17,8 @@ const theme = {
   mainBlue: "#8BAFED",
   mainOrange:"#FF8C00",
   blue:"#CEDFFE",
-  orange:"#FEDDCC"
+  orange:"#FEDDCC",
+  black: "#000000"
 }
 
 ReactDOM.render(
