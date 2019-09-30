@@ -124,7 +124,7 @@ input:focus{
   outline: none;
 } */
 /*////////////Answer Component//////////*/
-.answer {
+/* .answer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -174,4 +174,4 @@ input:focus{
   align-items: inherit;
   display: flex;
   flex-direction: row;
-}
+} */

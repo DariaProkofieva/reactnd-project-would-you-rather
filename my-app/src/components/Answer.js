@@ -3,8 +3,67 @@ import { handleAddAnswer } from '../actions/shared'
 import { connect } from 'react-redux'
 //import { Redirect } from 'react-router-dom'
 import Results from './Results'
+import styled from "styled-components"
 
-const Answer = ({ questions, authedUser, users, dispatch, qid, optionOne, optionTwo, avatar, name, id }) => {
+const BigAvatar = styled.img`
+  height: 180px;
+  border-radius: 50%;
+`
+const StyledAnswer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`
+const Input = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color:${props => props.theme.blue};
+  border-radius:25px;
+  width: 400px;
+`
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+const Button = styled.button`
+  text-transform: uppercase;
+  margin: 35px auto;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  width: 250px;
+  background-color: ${props => props.theme.mainOrange};
+  border-radius:25px;
+  user-select: none;
+  :focus {outline: none;}
+`
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-right:80px
+`
+const InnerInput = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  padding: 10px 0;
+`
+const Radio = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: baseline;
+`
+const Answer = ({ authedUser, dispatch, qid, optionOne, optionTwo, avatar, name, id }) => {
   const [answer, setAnswer] = useState('')
   const [toResults, setToResults] = useState(false)
  
@@ -19,40 +78,39 @@ const Answer = ({ questions, authedUser, users, dispatch, qid, optionOne, option
   }
 
     return (
-      <div className="answer">
+        <div>
         {toResults === false ?
-          <div className="question_avatar">
-            <div className="avatar_and_name">
-              <h2>{name} asks:</h2>
-                <img
-                  src={avatar}
-                  alt={`Avatar of ${name}`}
-                  className='avatarBig'
-                />
-            </div>
-            <div className="answerOptions">
-              <h1>Would you rather...</h1>
-              <form onSubmit={handleSubmitAnswer} className="form">
-                <div className="radio">
-                  <input type="radio"
-                         id="optionOne"
-                         name="option"
-                         value="optionOne"
-                         onChange={handleChange}/>
-                  <label htmlFor="optionOne">{optionOne}</label>
-                </div>
-                <div className="radio">
-                  <input type="radio"
-                         id="optionTwo"
-                         name="option"
-                         value="optionTwo"
-                         onChange={handleChange}/>
-                  <label htmlFor="optionOne">{optionTwo}</label>
-                </div>
-                <button className="btn">Submit</button>
-              </form>
-            </div>
-          </div>
+          <StyledAnswer>
+            <Div>
+            <h2>{name} asks:</h2>
+                <BigAvatar src={avatar}
+                          alt={`Avatar of ${name}`}></BigAvatar>
+            </Div>
+              <Input>
+                <h1>Would you Rather...</h1>
+                <Form onSubmit={handleSubmitAnswer}>
+                  <Radio>
+                  <InnerInput>
+                    <input type="radio"
+                          id="optionOne"
+                          name="option"
+                          value="optionOne"
+                          onChange={handleChange}/>
+                    <label htmlFor="optionOne">{optionOne}</label>
+                  </InnerInput>
+                  <InnerInput>
+                    <input type="radio"
+                          id="optionTwo"
+                          name="option"
+                          value="optionTwo"
+                          onChange={handleChange}/>
+                    <label htmlFor="optionOne">{optionTwo}</label>
+                  </InnerInput>
+                  </Radio>
+                  <Button>Submit</Button>
+                </Form> 
+              </Input>
+            </StyledAnswer>
         :<Results id={id}/>}
         </div>
     )

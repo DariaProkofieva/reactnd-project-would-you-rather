@@ -19,6 +19,7 @@ const MainNav = styled.nav`
   flex-direction: row;
   justify-content: space-around;
   align-items:center;
+  padding: 20px;
 `
 const SmallAvatar = styled.img`
   height: 50px;
