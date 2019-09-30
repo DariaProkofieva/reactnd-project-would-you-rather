@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
 import { Redirect } from 'react-router-dom'
@@ -48,24 +48,18 @@ const StyledFormButton = styled.select`
   overflow: auto;
   :focus {outline: none;}
 `
-class SingIn extends Component {
-  state = {
-    selectedUser: null
+const SingIn = ({ users, authedUser, dispatch }) => {
+  const [selectedUser, setSelectedUser] = useState(null)
+ 
+  const handleChange = ( event ) => {
+    setSelectedUser(event.target.value)
   }
 
-  handleChange = ( event ) => {
-    this.setState({ selectedUser: event.target.value })
-  }
-
-  handleSubmitUser = ( event ) => {
+  const handleSubmitUser = ( event ) => {
       event.preventDefault()
-      const { selectedUser } = this.state
-      const { dispatch } = this.props
       dispatch(setAuthedUser(selectedUser))
   }
 
-  render() {
-    let authedUser = this.props
     if (authedUser === true) {
       return <Redirect to='/home'/>
     }
@@ -77,12 +71,12 @@ class SingIn extends Component {
           src="https://sun9-30.userapi.com/c851232/v851232949/1c5381/uABhMbHAaCQ.jpg"
           alt="Avatar icon"></BigAvatar>
           <StyledH1>Sing in</StyledH1>
-          <StyledForm onSubmit={this.handleSubmitUser}>
-            <StyledFormButton onChange={this.handleChange}>
+          <StyledForm onSubmit={handleSubmitUser}>
+            <StyledFormButton onChange={handleChange}>
                 <option>Select User</option>
-                {Object.keys(this.props.users).map((user) => (
-                  <option key={this.props.users[user].id} value={this.props.users[user].id}>
-                    {this.props.users[user].name}
+                {Object.keys(users).map((user) => (
+                  <option key={users[user].id} value={users[user].id}>
+                    {users[user].name}
                   </option>
                 ))}
             </StyledFormButton>
@@ -91,7 +85,6 @@ class SingIn extends Component {
       </StyledSingIn> 
     )
   }
-}
 
 function mapStateToProps({  users, authedUser }) {
   if (authedUser === undefined) {
