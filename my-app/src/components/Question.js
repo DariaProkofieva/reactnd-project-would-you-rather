@@ -1,23 +1,26 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
 import { formatQuestion } from '../utils/helpers'
 import { Link } from 'react-router-dom'
+import styled from "styled-components"
 
-class Question extends Component {
-  render() {
-    const { question } = this.props
-    const { name, id, timestamp, optionOne, optionTwo, answer } = question
+const Question = ({ authedUser, question, name, id, optionOne, }) => {
+
+
+//class Question extends Component {
+ // render() {
+    //const { question } = this.props
+    //const { name, id, timestamp, optionOne, optionTwo, answer,id } = question
     return (
-      <div className='question'>
-        <div><span>{name} asks:</span></div>
+      <div>
+        <div><span>{question.name} asks:</span></div>
         <div><h3>Would you rather</h3></div>
-        <div>{optionOne.text}</div>
+        <div>{question.optionOne.text}</div>
         <Link to={`/answer/${id}`}>View Profile</Link>
-        <div>{this.props.id}</div>
       </div>
     )
   }
-}
+//}
 
 function mapStateToProps({authedUser, questions, users}, { id }) {
   const question = questions[id]
