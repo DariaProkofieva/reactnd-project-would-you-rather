@@ -32,7 +32,7 @@ const StyledDiv = styled.div`
   align-items:center;
 `
 const Nav = ({ authedUser, userName, avatar, dispatch }) => {
-  const [active, setActive] = useState(false)
+  //const [active, setActive] = useState(false)
   const handleLogout = ( event ) => {
       dispatch(logout(authedUser))
   }

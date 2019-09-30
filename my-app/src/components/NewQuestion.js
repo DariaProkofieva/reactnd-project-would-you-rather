@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { handleAddQuestion } from '../actions/questions'
 import { Redirect } from 'react-router-dom'
 import styled from "styled-components"
+import { useState } from 'react'
 
 const StyledNewQuestion = styled.div`
   display: flex;
@@ -37,61 +38,57 @@ const Button = styled.button`
   user-select: none;
   :focus {outline: none;}
 `
-class NewQuestion extends Component {
-  state = {
-    optionOneText: '',
-    optionTwoText: '',
-    toHome: false,
+
+function NewQuestion({dispatch}) {
+  const [toHome, setToHome] = useState(false);
+  const [state, setState] = React.useState({
+    optionOneText: "",
+    optionTwoText: ""
+  })
+
+  const handleChange = ( event ) => {
+    setState({
+      ...state,
+      [event.target.name]: event.target.value
+    });
   }
 
-  handleChange = ( event ) => {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
-  handleSubmit = ( event ) => {
+  const handleSubmit = ( event ) => {
     event.preventDefault()
-    const { optionOneText, optionTwoText } = this.state
-    const { dispatch } = this.props
-    dispatch(handleAddQuestion(optionOneText, optionTwoText))
-    this.setState(() => ({
-      toHome: true
-    }))
+    dispatch(handleAddQuestion(state.optionOneText, state.optionTwoText))
+    setToHome(() => (true))
   }
   
-  render() {
-    const { toHome } = this.state
-
     if (toHome === true) {
-      return <Redirect to='/home'/>
-    }
+      return <Redirect to='/home'/>}
+
     return (
       <StyledNewQuestion>
         <h1>Create New Question</h1>
         <p>Complete the question:</p>
         <h2>Would you rather...</h2>
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={handleSubmit}>
         <Input
           type="text"
           placeholder="Enter option one text here"
-          value={this.state.optionOneText}
+          value={state.optionOneText}
           name="optionOneText"
           maxLength={100}
-          onChange={this.handleChange}
+          onChange={handleChange}
         >
         </Input>
         <h3>OR</h3>
         <Input
           type="text"
           placeholder="Enter option two text here"
-          value={this.state.optionTwoText}
+          value={state.optionTwoText}
           name="optionTwoText"
           maxLength={100}
-          onChange={this.handleChange}      
+          onChange={handleChange}      
         ></Input>
         <Button>Submit</Button>
         </Form>
       </StyledNewQuestion>
-    )
-  }
-}
+    )}
+
 export default connect()(NewQuestion)
