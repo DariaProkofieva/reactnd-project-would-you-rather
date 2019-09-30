@@ -1,31 +1,23 @@
-import React from 'react'
+import React, { Component, useState }  from 'react'
 import { handleAddAnswer } from '../actions/shared'
 import { connect } from 'react-redux'
 //import { Redirect } from 'react-router-dom'
 import Results from './Results'
 
-class Answer extends React.Component {
-  state = {
-    answer: '',
-    toResults:false
-  }
-  handleChange = ( event ) => {
-    this.setState({ answer: event.target.value })
+const Answer = ({ questions, authedUser, users, dispatch, qid, optionOne, optionTwo, avatar, name, id }) => {
+  const [answer, setAnswer] = useState('')
+  const [toResults, setToResults] = useState(false)
+ 
+  const handleChange = ( event ) => {
+    setAnswer(event.target.value)
   }
 
-  handleSubmitAnswer = ( event ) => {
+  const handleSubmitAnswer = ( event ) => {
       event.preventDefault()
-      const { answer } = this.state
-      const { dispatch, authedUser, qid} = this.props
       dispatch(handleAddAnswer(authedUser, qid, answer))
-      this.setState(() => ({
-        toResults: true
-      }))
+      setToResults(() => (true))
   }
 
-  render() {
-    const { toResults } = this.state
-    const { name, question, optionOne, optionTwo, authedUser, qid, avatar} =this.props
     return (
       <div className="answer">
         {toResults === false ?
@@ -33,20 +25,20 @@ class Answer extends React.Component {
             <div className="avatar_and_name">
               <h2>{name} asks:</h2>
                 <img
-                  src={this.props.avatar}
-                  alt={`Avatar of ${this.props.name}`}
+                  src={avatar}
+                  alt={`Avatar of ${name}`}
                   className='avatarBig'
                 />
             </div>
             <div className="answerOptions">
               <h1>Would you rather...</h1>
-              <form onSubmit={this.handleSubmitAnswer} className="form">
+              <form onSubmit={handleSubmitAnswer} className="form">
                 <div className="radio">
                   <input type="radio"
                          id="optionOne"
                          name="option"
                          value="optionOne"
-                         onChange={this.handleChange}/>
+                         onChange={handleChange}/>
                   <label htmlFor="optionOne">{optionOne}</label>
                 </div>
                 <div className="radio">
@@ -54,17 +46,17 @@ class Answer extends React.Component {
                          id="optionTwo"
                          name="option"
                          value="optionTwo"
-                         onChange={this.handleChange}/>
+                         onChange={handleChange}/>
                   <label htmlFor="optionOne">{optionTwo}</label>
                 </div>
                 <button className="btn">Submit</button>
               </form>
             </div>
           </div>
-        :<Results id={this.props.id}/>}</div>
+        :<Results id={id}/>}
+        </div>
     )
   }
-}
 
 const mapStateToProps = ({ questions, authedUser, users }, props) => {
   const { id } = props.match.params
@@ -91,4 +83,4 @@ const mapStateToProps = ({ questions, authedUser, users }, props) => {
 }
 
 
-export default connect()(Answer)
+export default connect(mapStateToProps)(Answer)
