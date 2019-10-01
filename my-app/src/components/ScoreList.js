@@ -1,21 +1,26 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { connect } from 'react-redux'
 import Score from './Score'
+import styled from 'styled-components'
 
-class ScoreList extends Component {
-  render() {
-    const { usersIdsSorted } = this.props
+const StyledScoreList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin:0;
+`
+const ScoreList = ({ usersIdsSorted, id }) => {
     return (
-      <ul>
+      <StyledScoreList>
          {usersIdsSorted.map((id) => (
            <li key={id}>
             <Score id={id}/>
            </li>
         ))}
-      </ul>
+      </StyledScoreList>
     )
   }
-}
 
 function mapStateToProps ({ users }) {
   return {
