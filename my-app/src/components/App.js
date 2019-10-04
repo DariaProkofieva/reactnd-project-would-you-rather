@@ -7,9 +7,10 @@ import NewQuestion from "./NewQuestion";
 import Answer from "./Answer";
 import SingIn from "./SingIn";
 import Results from "./Results";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./Nav";
 import ScoreList from "./ScoreList";
+import Page404 from "./Page404";
 
 class App extends Component {
   componentDidMount() {
@@ -32,6 +33,7 @@ class App extends Component {
                 <Route path="/login" component={SingIn} />
                 <Route path="/results" component={Results} />
                 <Route path="/leaderboard" component={ScoreList} />
+                <Route path="/page404" component={Page404} />
               </div>
             )}
           </div>
