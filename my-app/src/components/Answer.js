@@ -2,7 +2,6 @@ import React, { Component, useState } from "react";
 import { handleAddAnswer } from "../actions/shared";
 import { connect } from "react-redux";
 import { Redirect, navigate } from "react-router-dom";
-import Results from "./Results";
 import styled from "styled-components";
 
 const BigAvatar = styled.img`
@@ -73,10 +72,7 @@ const Answer = ({
   optionTwo,
   avatar,
   name,
-  id,
-  questions,
-  questionsArray,
-  author
+  id
 }) => {
   const [answer, setAnswer] = useState("");
   const [toResults, setToResults] = useState(false);
@@ -150,7 +146,6 @@ const mapStateToProps = ({ questions, authedUser, users }, props) => {
   const optionTwo = question.optionTwo.text;
   const qid = id;
   const avatar = users[authedUser] ? users[authedUser].avatarURL : null;
-  const questionsArray = Object.keys(questions);
   return {
     question,
     id,
@@ -160,9 +155,7 @@ const mapStateToProps = ({ questions, authedUser, users }, props) => {
     qid,
     authedUser,
     name: author === undefined ? null : users[author].name,
-    avatar,
-    questions,
-    questionsArray
+    avatar
   };
 };
 
