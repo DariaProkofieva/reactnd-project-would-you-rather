@@ -31,7 +31,7 @@ class App extends Component {
                 <Route path="/answer/:id" component={Answer} />
                 <Route path="/add" component={NewQuestion} />
                 <Route path="/login" component={SingIn} />
-                <Route path="/results" component={Results} />
+                <Route path="/results/:id" component={Results} />
                 <Route path="/leaderboard" component={ScoreList} />
                 <Route path="/page404" component={Page404} />
               </div>

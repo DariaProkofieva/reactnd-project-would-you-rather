@@ -1,7 +1,7 @@
 import React, { Component, useState } from "react";
 import { handleAddAnswer } from "../actions/shared";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, navigate } from "react-router-dom";
 import Results from "./Results";
 import styled from "styled-components";
 
@@ -133,7 +133,7 @@ const Answer = ({
           </Input>
         </StyledAnswer>
       ) : (
-        <Results id={id} />
+        <Redirect to={`/results/${id}`} />
       )}
     </div>
   );
