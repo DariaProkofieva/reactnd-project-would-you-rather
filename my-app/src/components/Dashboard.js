@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import Question from "./Question";
 import styled from "styled-components";
@@ -133,8 +133,6 @@ function mapStateToProps({ questions, authedUser, users }) {
     key => !userAnsweredQuestions.includes(key)
   );
   return {
-    userUnansweredQuestions,
-    userAnsweredQuestions,
     authedUser,
     users,
     userUnansweredQuestions: !userUnansweredQuestions

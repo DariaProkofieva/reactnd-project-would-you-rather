@@ -1,7 +1,7 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { handleAddAnswer } from "../actions/shared";
 import { connect } from "react-redux";
-import { Redirect, navigate } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 
 const BigAvatar = styled.img`

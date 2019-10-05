@@ -7,7 +7,7 @@ import NewQuestion from "./NewQuestion";
 import Answer from "./Answer";
 import SingIn from "./SingIn";
 import Results from "./Results";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Nav from "./Nav";
 import ScoreList from "./ScoreList";
 import Page404 from "./Page404";
