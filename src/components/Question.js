@@ -56,16 +56,6 @@ const InnerQuestion = styled.div`
   padding: 10px;
 `;
 const Question = ({ authedUser, question, name, id, avatar }) => {
-  let display;
-  if (
-    question.optionOne.votes.includes(authedUser) ||
-    question.optionTwo.votes.includes(authedUser)
-  ) {
-    display = <StyledLink to={`/results/${id}`}>View Profile</StyledLink>;
-  } else {
-    display = <StyledLink to={`/answer/${id}`}>View Profile</StyledLink>;
-  }
-
   return (
     <StyledQuestion>
       <Div>
@@ -75,7 +65,7 @@ const Question = ({ authedUser, question, name, id, avatar }) => {
       <InnerQuestion>
         <h2>Would you rather</h2>
         <p>...{question.optionOne.text}...</p>
-        {display}
+        <StyledLink to={`/questions/${id}`}>View Profile</StyledLink>
       </InnerQuestion>
     </StyledQuestion>
   );

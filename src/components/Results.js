@@ -114,8 +114,8 @@ class Results extends Component {
   }
 }
 
-function mapStateToProps({ questions, authedUser, users }, props) {
-  const { id } = props.match.params;
+function mapStateToProps({ questions, authedUser, users }, { id }) {
+  //const { id } = props.match.params;
   const question = questions[id];
   if (question === undefined) {
     return;
