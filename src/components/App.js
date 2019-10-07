@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Nav from "./Nav";
 import ScoreList from "./ScoreList";
 import Page404 from "./Page404";
+import { Redirect } from "react-router-dom";
 
 class App extends Component {
   componentDidMount() {
@@ -23,7 +24,10 @@ class App extends Component {
           <div className="container">
             <Nav />
             {this.props.authedUser === null ? (
-              <SingIn />
+              <div>
+                <SingIn />
+                <Redirect to="/home" />
+              </div>
             ) : (
               <div>
                 <Route path="/home" component={Dashboard} />
