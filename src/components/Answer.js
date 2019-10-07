@@ -140,7 +140,7 @@ const mapStateToProps = ({ questions, authedUser, users }, props) => {
   const { id } = props.match.params;
   const question = questions[id];
   if (question === undefined) {
-    return;
+    return {};
   }
   const author = question.author;
   const optionOne = question.optionOne.text;

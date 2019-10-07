@@ -74,7 +74,7 @@ const Question = ({ authedUser, question, name, id, avatar }) => {
 function mapStateToProps({ authedUser, questions, users }, { id }) {
   const question = questions[id];
   if (question === undefined) {
-    return;
+    return {};
   }
   const user = question ? users[question.author] : null;
   const avatar = user ? user.avatarURL : null;
