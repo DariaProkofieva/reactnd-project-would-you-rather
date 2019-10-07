@@ -93,7 +93,7 @@ const Score = ({
 function mapStateToProps({ questions, authedUser, users }, { id }) {
   const user = users[id];
   if (user === undefined) {
-    return;
+    return {};
   }
   const answeredQuestions = Object.keys(user.answers).length;
   const createdQuestions = Object.keys(user.questions).length;
