@@ -6,7 +6,6 @@ import LoadingBar from "react-redux-loading-bar";
 import NewQuestion from "./NewQuestion";
 import Answer from "./Answer";
 import SingIn from "./SingIn";
-import Results from "./Results";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Nav from "./Nav";
 import ScoreList from "./ScoreList";
@@ -24,14 +23,15 @@ class App extends Component {
           <div className="container">
             <Nav />
             {this.props.authedUser === null ? (
-              <SingIn />
+              <div>
+                <SingIn />
+              </div>
             ) : (
               <div>
-                <Route path="/home" component={Dashboard} />
-                <Route path="/answer/:id" component={Answer} />
+                <Route exact path="/" component={Dashboard} />
+                <Route path="/questions/:id" component={Answer} />
                 <Route path="/add" component={NewQuestion} />
                 <Route path="/login" component={SingIn} />
-                <Route path="/results/:id" component={Results} />
                 <Route path="/leaderboard" component={ScoreList} />
                 <Route path="/page404" component={Page404} />
               </div>

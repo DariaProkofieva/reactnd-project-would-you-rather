@@ -85,7 +85,7 @@ const SingIn = ({ users, authedUser, dispatch }) => {
           ))}
         </StyledFormButton>
         <Button>Sing in</Button>
-        {authedUser !== null ? <Redirect to="/home" /> : null}
+        {authedUser !== null ? <Redirect to="/" /> : null}
       </StyledForm>
     </StyledSingIn>
   );

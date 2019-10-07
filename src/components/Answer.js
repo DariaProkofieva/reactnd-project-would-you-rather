@@ -3,6 +3,7 @@ import { handleAddAnswer } from "../actions/shared";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import styled from "styled-components";
+import Results from "./Results";
 
 const BigAvatar = styled.img`
   height: 180px;
@@ -72,10 +73,10 @@ const Answer = ({
   optionTwo,
   avatar,
   name,
-  id
+  id,
+  question
 }) => {
   const [answer, setAnswer] = useState("");
-  const [toResults, setToResults] = useState(false);
 
   const handleChange = event => {
     setAnswer(event.target.value);
@@ -84,7 +85,6 @@ const Answer = ({
   const handleSubmitAnswer = event => {
     event.preventDefault();
     dispatch(handleAddAnswer(authedUser, qid, answer));
-    setToResults(() => true);
   };
 
   if (id === undefined) {
@@ -93,7 +93,10 @@ const Answer = ({
 
   return (
     <div>
-      {toResults === false ? (
+      {question.optionOne.votes.includes(authedUser) ||
+      question.optionTwo.votes.includes(authedUser) ? (
+        <Results id={id} />
+      ) : (
         <StyledAnswer>
           <Div>
             <h2>{name} asks:</h2>
@@ -128,8 +131,6 @@ const Answer = ({
             </Form>
           </Input>
         </StyledAnswer>
-      ) : (
-        <Redirect to={`/results/${id}`} />
       )}
     </div>
   );
