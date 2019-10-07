@@ -64,7 +64,7 @@ function NewQuestion({ dispatch }) {
   };
 
   if (toHome === true) {
-    return <Redirect to="/home" />;
+    return <Redirect to="/" />;
   }
 
   return (

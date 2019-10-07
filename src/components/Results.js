@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { Redirect } from "react-router-dom";
 
 const StyledResult = styled.ul`
   display: flex;
@@ -70,7 +71,7 @@ const H2 = styled.h2`
 `;
 class Results extends Component {
   render() {
-    const { optionOne, optionTwo, question, name, avatar } = this.props;
+    const { optionOne, optionTwo, question, name, avatar, id } = this.props;
     const allVotes =
       question.optionOne.votes.length + question.optionTwo.votes.length;
     const optionOneVotes = question.optionOne.votes.length;
@@ -78,6 +79,11 @@ class Results extends Component {
     const oneUser = Math.round(100 / allVotes);
     const percentageOptionOne = oneUser * optionOneVotes;
     const percentageOptionTwo = oneUser * optionTwoVotes;
+
+    if (id === undefined) {
+      return <Redirect to="/page404" />;
+    }
+
     return (
       <StyledResult>
         <Div>
@@ -115,7 +121,6 @@ class Results extends Component {
 }
 
 function mapStateToProps({ questions, authedUser, users }, { id }) {
-  //const { id } = props.match.params;
   const question = questions[id];
   if (question === undefined) {
     return;

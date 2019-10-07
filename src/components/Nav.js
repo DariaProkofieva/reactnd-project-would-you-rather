@@ -41,7 +41,7 @@ const Nav = ({ authedUser, userName, avatar, dispatch }) => {
 
   return (
     <MainNav>
-      <StyledNavLink to="/home">Home</StyledNavLink>
+      <StyledNavLink to="/">Home</StyledNavLink>
       <StyledNavLink to="/add">New Question</StyledNavLink>
       <StyledNavLink to="/leaderboard">Leader Board</StyledNavLink>
       {authedUser !== null && (
